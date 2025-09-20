@@ -1,0 +1,570 @@
+/* ==============================
+   Reset
+============================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ==============================
+   Header & Navbar
+============================== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: #0077cc;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.nav-links a {
+  color: #fff;
+  margin: 0 10px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+.cta-button {
+  background: #ffcc00;
+  color: #333 !important;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+/* Hamburger (Mobile Menu Button) */
+.hamburger {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Mobile Navigation */
+.mobile-nav {
+  display: none;
+  flex-direction: column;
+  background: #0077cc;
+}
+
+.mobile-nav a {
+  color: #fff;
+  padding: 10px;
+  border-bottom: 1px solid #005fa3;
+  text-decoration: none;
+}
+
+/* ==============================
+   Hero Section
+============================== */
+.hero {
+  height: 90vh;
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+              url('data_gambar/bgberanda.jpg') no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+}
+
+.hero h1 {
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+/* ==============================
+   Sections & Cards
+============================== */
+section {
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.card {
+  background: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+  width: 200px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* ==============================
+   Makalah Page
+============================== */
+.makalah-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  text-align: left;
+}
+
+.makalah-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 28px;
+  color: #0077cc;
+}
+
+.makalah-list {
+  list-style: none;
+  padding: 0;
+}
+
+.makalah-list li {
+  background: #f9f9f9;
+  padding: 15px 20px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.makalah-list li:hover {
+  background: #eef6ff;
+  transform: translateX(5px);
+}
+
+.makalah-list a {
+  color: #0077cc;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.makalah-list a:hover {
+  text-decoration: underline;
+}
+
+/* ==============================
+   Makalah Buttons
+============================== */
+.action-buttons {
+  float: right;
+}
+
+.lihat-btn, .download-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-left: 8px;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+/* Tombol Lihat */
+.lihat-btn {
+  background: #0077cc;
+  color: #fff !important;  /* Paksa teks putih */
+}
+
+.lihat-btn:hover {
+  background: #005fa3;
+  color: #fff !important;  /* Tetap putih saat hover */
+}
+
+/* Tombol Download */
+.download-btn {
+  background: #ffcc00;
+  color: #333;
+}
+
+.download-btn:hover {
+  background: #e6b800;
+  color: #333;
+}
+
+
+/* ==============================
+   Login Page
+============================== */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.login-box {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  width: 350px;
+  text-align: center;
+}
+
+.login-box h2 {
+  margin-bottom: 20px;
+  color: #0077cc;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  background: #0077cc;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-btn:hover {
+  background: #005fa3;
+}
+
+.login-box p {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.login-box a {
+  color: #0077cc;
+  text-decoration: none;
+}
+
+.login-box a:hover {
+  text-decoration: underline;
+}
+
+/* ==============================
+   About Section informasi singkat
+============================== */
+.about {
+  padding: 60px 20px;
+  background: #f9f9f9;
+  text-align: center;
+}
+
+.about h2 {
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #0077cc;
+}
+
+.about-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.about-content img {
+  width: 280px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  flex-shrink: 0;
+}
+
+.about-content p {
+  flex: 1;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  text-align: justify;
+}
+
+.about-extra {
+  max-width: 900px;
+  margin: 30px auto 0;
+}
+
+.about-extra p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #555;
+  text-align: justify;
+}
+
+.about-content img {
+  width: 280px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  flex-shrink: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.about-content img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+}
+
+
+/* Responsive */
+@media (min-width: 768px) {
+  .about-content {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .about-content img {
+    flex: 1;
+  }
+
+  .about-content p {
+    flex: 2;
+  }
+}
+
+#user-info {
+  color: #fff;
+  margin: 0 10px;
+  font-weight: bold;
+}
+
+
+
+/* Struktur Kelas */
+.struktur {
+  padding: 50px 20px;
+  text-align: center;
+  background: #f9f9f9;
+}
+
+.struktur h2 {
+  margin-bottom: 30px;
+  font-size: 28px;
+  color: #0077cc;
+}
+
+.struktur-container {
+  display: flex;
+  justify-content: center;
+}
+
+.struktur-box {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  max-width: 500px;
+  text-align: center;
+}
+
+.struktur-box img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px; /* biar kotak rapi */
+  margin-bottom: 15px;
+}
+
+.struktur-box h3 {
+  margin-bottom: 10px;
+  color: #0077cc;
+}
+
+/* Struktur MPI B */
+.struktur {
+  padding: 50px 20px;
+  background: #f9f9f9;
+}
+
+.struktur h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  color: #0077cc;
+}
+
+.struktur-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  max-width: 900px;
+  margin: 0 auto;
+  flex-wrap: wrap; /* biar responsif */
+}
+
+.struktur-img img {
+  width: 280px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.struktur-text {
+  max-width: 500px;
+}
+
+.struktur-text h3 {
+  margin-bottom: 15px;
+  color: #0077cc;
+  font-size: 22px;
+}
+
+.struktur-text p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+}
+
+
+/* Tentang Kami - Gambar */
+.about-image {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.about-image img {
+  width: 100%;          /* supaya lebar penuh mengikuti container */
+  max-width: 600px;     /* batas maksimal biar tidak terlalu besar */
+  height: auto;         /* biar proporsional, tidak terpotong */
+  object-fit: contain;  /* pastikan seluruh gambar terlihat */
+  border-radius: 10px;  /* opsional, bisa dihapus kalau mau kotak tajam */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Kontak - Sosial Media */
+.social-links {
+  margin-top: 15px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.social-links a {
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: 0.3s;
+}
+
+/* Warna brand */
+.social-links a.instagram {
+  color: #E4405F; /* Pink Instagram */
+}
+
+.social-links a.tiktok {
+  color: #000; /* Hitam TikTok */
+}
+
+.social-links a.instagram:hover {
+  color: #C13584; /* Darker Instagram */
+}
+
+.social-links a.tiktok:hover {
+  color: #ff0050; /* Aksen TikTok */
+}
+
+.social-links i {
+  font-size: 20px;
+}
+
+/* Ikon Sosial Media */
+.social-icons {
+  margin: 15px 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.social-icons a {
+  color: #0077cc;
+  text-decoration: none;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.social-icons a:hover {
+  color: #005fa3;
+}
+
+/* Gambar di bawah IG & TikTok */
+.contact-image {
+  margin-top: 20px;
+}
+
+.contact-image img {
+  width: 100%;       /* Biar full lebar */
+  max-width: 1200px; /* Batas maksimal agar tidak terlalu melebar di layar besar */
+  height: auto;      /* Tinggi otomatis */
+  display: block;
+  margin: 0 auto;    /* Supaya center */
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+
+
+
+/* ==============================
+   Footer
+============================== */
+footer {
+  background: #0077cc;
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+  margin-top: 30px;
+}
+
+/* ==============================
+   Responsive
+============================== */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .cards {
+    flex-direction: column;
+    align-items: center;
+  }
+}

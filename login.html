@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Kelas MPI B</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header / Navbar -->
+  <header>
+    <div class="logo">Kelas MPI B</div>
+<div class="nav-links">
+  <a href="index.html" class="active">Beranda</a>
+  <a href="tentang.html">Tentang Kami</a>
+  <a href="makalah.html">Kumpulan Makalah</a>
+  <a href="kontak.html">Kontak</a>
+  <span id="user-info"></span>
+  <a href="login.html" class="cta-button" id="login-btn">Login</a>
+  <a href="#" class="cta-button" id="logout-btn" style="display:none;" onclick="logout()">Logout</a>
+</div>
+
+    <div class="hamburger" id="hamburger">&#9776;</div>
+  </header>
+
+  <!-- Mobile Navigation -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html">Beranda</a>
+    <a href="tentang.html">Tentang Kami</a>
+    <a href="makalah.html">Kumpulan Makalah</a>
+    <a href="kontak.html">Kontak</a>
+    <a href="login.html" class="cta-button">Login</a>
+  </div>
+
+  <!-- Halaman Login -->
+  <div class="login-container">
+    <div class="login-box">
+      <h2>Login</h2>
+<form onsubmit="validateLogin(event)">
+  <input type="email" id="email" placeholder="Masukkan Email" required>
+  <input type="password" id="password" placeholder="Masukkan Password" required>
+  <button type="submit" class="login-btn">Login</button>
+</form>
+
+      <p>Belum punya akun? <a href="#">Daftar</a></p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Kelas MPI (B). Semua Hak Dilindungi.</p>
+  </footer>
+
+  <!-- Script Mobile Nav -->
+  <script src="script.js"></script>
+</body>
+</html>
