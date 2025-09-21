@@ -265,6 +265,34 @@ section {
   text-decoration: underline;
 }
 
+
+.login-image {
+  width: 100%;          /* gambar penuh lebar kotak */
+  max-width: 200px;     /* biar tidak terlalu besar */
+  aspect-ratio: 1/1;    /* proporsi persegi */
+  border-radius: 50%;   /* bikin bundar */
+  object-fit: cover;    /* isi gambar proporsional */
+  display: block;
+  margin: 0 auto 15px;  /* posisi tengah + jarak ke tulisan */
+}
+
+
+.login-extra-image {
+  margin: 20px auto;
+  text-align: center;
+}
+
+.login-extra-image img {
+  width: 100%;
+  max-width: 400px; /* ukuran lebih kecil */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+
+
+
 /* ==============================
    About Section informasi singkat
 ============================== */
