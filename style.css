@@ -73,7 +73,7 @@ header {
 .hero {
   height: 90vh;
   background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-              url('bgberanda.jpg') no-repeat center center/cover;
+              url('data_gambar/bgberanda.jpg') no-repeat center center/cover;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -596,4 +596,3 @@ footer {
     align-items: center;
   }
 }
-
