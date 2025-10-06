@@ -73,7 +73,7 @@ header {
 .hero {
   height: 90vh;
   background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-              url('data_gambar/bgberanda.jpg') no-repeat center center/cover;
+              url('bgberanda.jpg') no-repeat center center/cover;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -564,6 +564,245 @@ section {
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.25);
 }
+
+
+/* ========== SECTION UPLOAD MAKAALAH ========== */
+.upload-section, .table-section {
+  padding: 40px 6%;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.upload-title {
+  text-align: center;
+  color: #1e2a38;
+  font-size: 24px;
+  margin-bottom: 25px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ========== FORM UPLOAD ========== */
+form {
+  max-width: 750px;
+  margin: 0 auto 40px;
+  padding: 30px;
+  background: linear-gradient(145deg, #ffffff, #f2f5f9);
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+form:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}
+
+form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+form input[type="text"],
+form input[type="number"],
+form input[type="date"],
+form input[type="file"] {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 18px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  background-color: #f9fafc;
+  transition: all 0.3s ease;
+}
+
+form input:focus {
+  border-color: #2980b9;
+  box-shadow: 0 0 5px rgba(41, 128, 185, 0.4);
+  background: #fff;
+}
+
+form button {
+  width: 100%;
+  background: linear-gradient(135deg, #2980b9, #2c3e50);
+  color: white;
+  font-weight: bold;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+form button:hover {
+  background: linear-gradient(135deg, #3498db, #34495e);
+  transform: translateY(-1px);
+}
+
+
+
+
+
+
+/* ========== TABEL MAKAALAH ========== */
+.table-section table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.table-section th,
+.table-section td {
+  border: 1px solid #e0e6ed;
+  padding: 14px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.table-section th {
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  color: white;
+  font-weight: 600;
+}
+
+.table-section tr:nth-child(even) {
+  background: #f8f9fb;
+}
+
+.table-section tr:hover {
+  background: #eef6ff;
+  transition: 0.3s;
+}
+
+/* ========== TOMBOL AKSI ========== */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.action-buttons button,
+.action-buttons a {
+  padding: 7px 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.action-buttons button i,
+.action-buttons a i {
+  font-size: 15px;
+}
+
+/* Tombol Lihat */
+.lihat-btn {
+  background: linear-gradient(135deg, #3498db, #2e86c1);
+}
+
+.lihat-btn:hover {
+  background: linear-gradient(135deg, #5dade2, #2e86c1);
+  transform: scale(1.05);
+}
+
+/* Tombol Download */
+.download-btn {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+.download-btn:hover {
+  background: linear-gradient(135deg, #58d68d, #229954);
+  transform: scale(1.05);
+}
+
+/* Tombol Hapus */
+.delete-btn {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+.delete-btn:hover {
+  background: linear-gradient(135deg, #ec7063, #a93226);
+  transform: scale(1.05);
+}
+
+.edit-btn {
+  background: #f39c12;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.edit-btn:hover {
+  background: #d68910;
+}
+
+
+
+/* ========== PREVIEW FILE ========== */
+.preview-section {
+  width: 95%;
+  margin: 40px auto;
+  text-align: center;
+}
+
+.preview-section iframe {
+  width: 100%;
+  height: 500px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+@media (max-width: 768px) {
+  form {
+    padding: 20px;
+  }
+
+  .upload-title {
+    font-size: 20px;
+  }
+
+  table th, table td {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .preview-section iframe {
+    height: 350px;
+  }
+}
+
+
+
+
+
 
 
 

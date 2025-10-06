@@ -5,65 +5,86 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kumpulan Makalah - Kelas MPI B</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 <body>
-<!-- Header -->
-<header>
-  <div class="logo">Kelas MPI B</div>
-  <nav>
-    <div class="nav-links">
-      <a href="index.html" class="active">Beranda</a>
-      <a href="tentang.html">Tentang Kami</a>
-      <a href="makalah.html">Kumpulan Makalah</a>
-      <a href="kontak.html">Kontak</a>
-      <span id="user-info"></span>
-      <a href="login.html" class="cta-button" id="login-btn-desktop">Login</a>
-      <a href="#" class="cta-button" id="logout-btn-desktop" style="display:none;">Logout</a>
-    </div>
-    <div class="hamburger" id="hamburger">☰</div>
-  </nav>
-</header>
 
-<!-- Mobile Nav -->
-<div class="mobile-nav" id="mobileNav">
-  <a href="index.html">Beranda</a>
-  <a href="tentang.html">Tentang Kami</a>
-  <a href="makalah.html">Kumpulan Makalah</a>
-  <a href="kontak.html">Kontak</a>
-  <a href="login.html" class="cta-button" id="login-btn-mobile">Login</a>
-  <a href="#" class="cta-button" id="logout-btn-mobile" style="display:none;">Logout</a>
-</div>
+  <!-- Header -->
+  <header>
+    <div class="logo">Kelas MPI B</div>
+    <nav>
+      <div class="nav-links">
+        <a href="index.html">Beranda</a>
+        <a href="tentang.html">Tentang Kami</a>
+        <a href="makalah.html" class="active">Kumpulan Makalah</a>
+        <a href="kontak.html">Kontak</a>
+        <span id="user-info"></span>
+        <a href="login.html" class="cta-button" id="login-btn-desktop">Login</a>
+        <a href="#" class="cta-button" id="logout-btn-desktop" style="display:none;">Logout</a>
+      </div>
+      <div class="hamburger" id="hamburger">☰</div>
+    </nav>
+  </header>
 
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html">Beranda</a>
+    <a href="tentang.html">Tentang Kami</a>
+    <a href="makalah.html" class="active">Kumpulan Makalah</a>
+    <a href="kontak.html">Kontak</a>
+    <a href="login.html" class="cta-button" id="login-btn-mobile">Login</a>
+    <a href="#" class="cta-button" id="logout-btn-mobile" style="display:none;">Logout</a>
+  </div>
 
-  <!-- Content -->
+  <!-- Upload Form -->
+  <section class="upload-section">
+    <h2 class="upload-title">Upload Makalah</h2>
 
-<section class="makalah-container">
-    <h2>📚 Kumpulan Makalah</h2>
-    <ul class="makalah-list">
-      <li>
-        <span>Makalah 1: Sejarah Perkembangan Fiqh</span>
-        <div class="action-buttons">
-          <a href="makalah/makalah1.pdf" target="_blank" class="lihat-btn">Lihat</a>
-          <a href="makalah/makalah1.pdf" download class="download-btn">Download</a>
-        </div>
-      </li>
-      <li>
-        <span>Makalah 2: Ushul Fiqh dan Metode Ijtihad</span>
-        <div class="action-buttons">
-          <a href="makalah/makalah2.pdf" target="_blank" class="lihat-btn">Lihat</a>
-          <a href="makalah/makalah2.pdf" download class="download-btn">Download</a>
-        </div>
-      </li>
-      <li>
-        <span>Makalah 3: Manajemen Pendidikan Islam</span>
-        <div class="action-buttons">
-          <a href="makalah/makalah3.pdf" target="_blank" class="lihat-btn">Lihat</a>
-          <a href="makalah/makalah3.pdf" download class="download-btn">Download</a>
-        </div>
-      </li>
-    </ul>
+    <form id="makalahForm">
+      <label>Judul Makalah:</label>
+      <input type="text" id="judul" required>
+
+      <label>Kelompok:</label>
+      <input type="text" id="kelompok" required>
+
+      <label>Tanggal:</label>
+      <input type="date" id="tanggal" required>
+
+      <label>Pertemuan:</label>
+      <input type="number" id="pertemuan" required>
+
+      <label>Upload File (PDF/DOCX):</label>
+      <input type="file" id="file" accept=".pdf,.doc,.docx" required>
+
+      <button type="submit">Tambah Makalah</button>
+    </form>
   </section>
 
+
+  <!-- Table Section -->
+  <section class="table-section">
+    <h2 class="upload-title">Daftar Makalah</h2>
+
+    <!-- 🔍 Pencarian & Filter -->
+    <div class="search-filter">
+      <input type="text" id="searchInput" placeholder="Cari berdasarkan judul, kelompok, atau pertemuan...">
+    </div>
+
+    <table id="makalahTable">
+      <thead>
+        <tr>
+          <th>Judul</th>
+          <th>Kelompok</th>
+          <th>Tanggal</th>
+          <th>Pertemuan</th>
+          <th>Nama File</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
 
   <!-- Footer -->
   <footer>
@@ -73,3 +94,6 @@
   <script src="script.js"></script>
 </body>
 </html>
+
+
+
