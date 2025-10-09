@@ -9,32 +9,38 @@
 
 </head>
 <body>
-<!-- Header -->
-<header>
-  <div class="logo">Kelas MPI B</div>
-  <nav>
-    <div class="nav-links">
-      <a href="index.html" class="active">Beranda</a>
+<header class="navbar">
+  <div class="nav-container">
+    <!-- Logo -->
+    <a class="logo">Kelas MPI B</a>
+
+    <!-- Tombol hamburger (muncul hanya di mobile) -->
+    <button class="menu-toggle" id="menuToggle">☰</button>
+
+    <!-- Menu versi desktop -->
+    <nav class="nav-links">
+      <a href="index.html">Beranda</a>
       <a href="tentang.html">Tentang Kami</a>
       <a href="makalah.html">Kumpulan Makalah</a>
       <a href="kontak.html">Kontak</a>
-      <span id="user-info"></span>
-      <a href="login.html" class="cta-button" id="login-btn-desktop">Login</a>
-      <a href="#" class="cta-button" id="logout-btn-desktop" style="display:none;">Logout</a>
-    </div>
-    <div class="hamburger" id="hamburger">☰</div>
-  </nav>
+      <a href="login.html" id="login-btn-desktop">Login</a>
+  <a href="#" id="logout-btn-desktop" class="cta-button" style="display:none;">Logout</a>
+    </nav>
+  </div>
+
+  <!-- Menu versi mobile -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html">Beranda</a>
+    <a href="tentang.html">Tentang Kami</a>
+    <a href="makalah.html">Kumpulan Makalah</a>
+    <a href="kontak.html">Kontak</a>
+    <a href="login.html" id="login-btn-mobile">Login</a>
+  <a href="#" class="cta-button" id="logout-btn-mobile" style="display:none;">Logout</a>
+  </div>
 </header>
 
-<!-- Mobile Nav -->
-<div class="mobile-nav" id="mobileNav">
-  <a href="index.html">Beranda</a>
-  <a href="tentang.html">Tentang Kami</a>
-  <a href="makalah.html">Kumpulan Makalah</a>
-  <a href="kontak.html">Kontak</a>
-  <a href="login.html" class="cta-button" id="login-btn-mobile">Login</a>
-  <a href="#" class="cta-button" id="logout-btn-mobile" style="display:none;">Logout</a>
-</div>
+
+
 
 
 <!-- Content -->

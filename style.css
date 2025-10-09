@@ -25,12 +25,20 @@ header {
 .logo {
   font-weight: bold;
   font-size: 20px;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Menu desktop */
+.nav-links {
+  display: flex;
+  gap: 20px;
 }
 
 .nav-links a {
   color: #fff;
-  margin: 0 10px;
   text-decoration: none;
+  font-weight: 500;
   transition: 0.3s;
 }
 
@@ -38,34 +46,76 @@ header {
   text-decoration: underline;
 }
 
+/* Tombol CTA umum (misalnya Login) */
 .cta-button {
   background: #ffcc00;
   color: #333 !important;
   padding: 8px 15px;
   border-radius: 5px;
   font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  transition: 0.3s;
 }
 
-/* Hamburger (Mobile Menu Button) */
-.hamburger {
-  display: none;
-  font-size: 24px;
-  cursor: pointer;
+.cta-button:hover {
+  background: #e6b800;
 }
 
-/* Mobile Navigation */
+/* Tombol Logout khusus */
+#logout-btn-desktop,
+#logout-btn-mobile {
+  background: #ffcc00;   /* kuning */
+  color: #333 !important;
+}
+
+
+/* ==============================
+   Mobile Nav
+============================== */
 .mobile-nav {
   display: none;
   flex-direction: column;
-  background: #0077cc;
+  background: #fff;
+  position: absolute;
+  top: 65px; /* sedikit di bawah header */
+  right: 15px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  z-index: 999;
+  min-width: 180px;
 }
 
 .mobile-nav a {
-  color: #fff;
   padding: 10px;
-  border-bottom: 1px solid #005fa3;
   text-decoration: none;
+  color: #333;
+  border-radius: 6px;
 }
+
+.mobile-nav a:hover {
+  background: #f1f1f1;
+}
+
+/* Saat aktif (tombol ☰ diklik) */
+.mobile-nav.active {
+  display: flex;
+}
+
+/* ==============================
+   Responsive
+============================== */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; /* sembunyikan menu desktop */
+  }
+  .hamburger {
+    display: block; /* tampilkan tombol ☰ */
+  }
+}
+
+
 
 /* ==============================
    Hero Section
@@ -290,6 +340,11 @@ section {
   margin: 0 auto;
 }
 
+/* Tambahkan jarak dari navbar */
+.login-container {
+  margin-top: 100px; /* sesuaikan jarak sesuai tinggi navbar */
+  height: calc(80vh - 100px); /* biar tinggi total tetap proporsional */
+}
 
 
 

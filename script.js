@@ -1,27 +1,9 @@
 // ==============================
-// MENU NAVIGASI MOBILE
-// ==============================
-document.addEventListener("DOMContentLoaded", function () {
-  const menuToggle = document.getElementById("menu-toggle");
-  const navLinks = document.getElementById("nav-links");
-
-  if (menuToggle && navLinks) {
-    menuToggle.addEventListener("click", function () {
-      navLinks.classList.toggle("active");
-    });
-  }
-});
-
-
-
-
-
-// ==============================
 // KONFIGURASI USER LOGIN
 // ==============================
 const users = {
-  "mpiadmin@gmail.com": { password: "KELASMPIB2025", role: "admin" },
-  "mpiuser@gmail.com": { password: "KELASMPIB2025", role: "user" },
+  "mpiadmin@gmail.com": { password: "AdminMPIB2025", role: "admin" },
+  "mpiuser@gmail.com": { password: "UserMPIB2025", role: "user" },
 };
 
 // ==============================
@@ -64,7 +46,7 @@ function validateLogin(event) {
 }
 
 // ==============================
-// TAMPILKAN STATUS LOGIN
+// STATUS LOGIN + NAVBAR
 // ==============================
 document.addEventListener("DOMContentLoaded", function () {
   const userInfo = document.getElementById("user-info");
@@ -86,12 +68,10 @@ document.addEventListener("DOMContentLoaded", function () {
     if (loginMobile) loginMobile.style.display = "none";
     if (logoutMobile) logoutMobile.style.display = "inline-block";
 
-    // hanya admin yang bisa upload
     if (uploadSection) uploadSection.style.display = role === "admin" ? "block" : "none";
 
-    muatMakalahDariStorage();
+    loadMakalahTable();
   } else {
-    // kalau belum login dan bukan di halaman login → arahkan ke login
     if (page !== "login.html") {
       window.location.href = "login.html";
     }
@@ -103,77 +83,18 @@ document.addEventListener("DOMContentLoaded", function () {
     if (logoutMobile) logoutMobile.style.display = "none";
   }
 
-  // tombol logout
   if (logoutDesktop) logoutDesktop.addEventListener("click", logout);
   if (logoutMobile) logoutMobile.addEventListener("click", logout);
 });
 
 // ==============================
-// SIMPAN & TAMPILKAN MAKALAH
+// DATA MAKALAH
 // ==============================
-function simpanMakalahKeStorage(makalah) {
-  let data = JSON.parse(localStorage.getItem("daftarMakalah")) || [];
-  data.push(makalah);
-  localStorage.setItem("daftarMakalah", JSON.stringify(data));
-}
+let editIndex = null;
 
-function muatMakalahDariStorage() {
-  const data = JSON.parse(localStorage.getItem("daftarMakalah")) || [];
-  const table = document.getElementById("makalahTable")?.querySelector("tbody");
-  if (!table) return;
-
-  const role = getUserRole();
-  table.innerHTML = "";
-
-  data.forEach((item, index) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td>${item.judul}</td>
-      <td>${item.kelompok}</td>
-      <td>${item.tanggal}</td>
-      <td>${item.pertemuan}</td>
-      <td>${item.namaFile}</td>
-      <td>
-        <a href="${item.file}" target="_blank">Lihat</a> |
-        <a href="${item.file}" download="${item.namaFile}">Download</a>
-        ${role === "admin" ? ` | <button class="hapus-btn" data-index="${index}">Hapus</button>` : ""}
-      </td>
-    `;
-    table.appendChild(row);
-  });
-
-  if (role === "admin") {
-    document.querySelectorAll(".hapus-btn").forEach(btn => {
-      btn.addEventListener("click", function () {
-        hapusMakalah(this.dataset.index);
-      });
-    });
-  }
-}
-
-function hapusMakalah(index) {
-  if (confirm("Yakin ingin menghapus makalah ini?")) {
-    let data = JSON.parse(localStorage.getItem("daftarMakalah")) || [];
-    data.splice(index, 1);
-    localStorage.setItem("daftarMakalah", JSON.stringify(data));
-    muatMakalahDariStorage();
-  }
-}
-
-// ==============================
-// INISIALISASI
-// ==============================
-let editIndex = null; // indeks data yang sedang diedit
-
-// ==============================
-// LOAD DATA SAAT HALAMAN DIBUKA
-// ==============================
 document.addEventListener("DOMContentLoaded", loadMakalahTable);
 
-// ==============================
-// FORM UPLOAD / EDIT MAKALAH
-// ==============================
-document.getElementById("makalahForm").addEventListener("submit", async function (e) {
+document.getElementById("makalahForm")?.addEventListener("submit", async function (e) {
   e.preventDefault();
 
   const judul = document.getElementById("judul").value.trim();
@@ -189,7 +110,6 @@ document.getElementById("makalahForm").addEventListener("submit", async function
 
   let data = JSON.parse(localStorage.getItem("makalahData")) || [];
 
-  // Konversi file ke Base64
   const toBase64 = (file) =>
     new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -201,7 +121,6 @@ document.getElementById("makalahForm").addEventListener("submit", async function
   let fileData = null;
   if (file) fileData = await toBase64(file);
 
-  // === MODE EDIT ===
   if (editIndex !== null) {
     const existing = data[editIndex];
     data[editIndex] = {
@@ -215,7 +134,6 @@ document.getElementById("makalahForm").addEventListener("submit", async function
     alert("✅ Data makalah berhasil diperbarui!");
     editIndex = null;
   } else {
-    // === MODE TAMBAH BARU ===
     if (!file) {
       alert("Pilih file makalah terlebih dahulu!");
       return;
@@ -231,17 +149,14 @@ document.getElementById("makalahForm").addEventListener("submit", async function
     alert("✅ Makalah baru berhasil ditambahkan!");
   }
 
-  // Simpan ke localStorage dan refresh tabel
   localStorage.setItem("makalahData", JSON.stringify(data));
   this.reset();
   loadMakalahTable();
 });
 
-// ==============================
-// TAMPILKAN DATA KE TABEL
-// ==============================
 function loadMakalahTable() {
   const tableBody = document.querySelector("#makalahTable tbody");
+  if (!tableBody) return;
   const data = JSON.parse(localStorage.getItem("makalahData")) || [];
 
   tableBody.innerHTML = "";
@@ -250,6 +165,8 @@ function loadMakalahTable() {
     tableBody.innerHTML = `<tr><td colspan="6">Belum ada makalah diunggah.</td></tr>`;
     return;
   }
+
+  const role = getUserRole();
 
   data.forEach((item, index) => {
     const row = document.createElement("tr");
@@ -263,19 +180,16 @@ function loadMakalahTable() {
       <td class="action-buttons">
         <button class="lihat-btn"><i class="fa fa-eye"></i></button>
         <button class="download-btn"><i class="fa fa-download"></i></button>
-        <button class="edit-btn"><i class="fa fa-pen"></i></button>
-        <button class="delete-btn"><i class="fa fa-trash"></i></button>
+        ${role === "admin" ? `<button class="edit-btn"><i class="fa fa-pen"></i></button>
+        <button class="delete-btn"><i class="fa fa-trash"></i></button>` : ""}
       </td>
     `;
 
-// === LIHAT FILE ===
-row.querySelector(".lihat-btn").addEventListener("click", () => {
-  const nameParam = encodeURIComponent(item.fileName);
-  window.location.href = `lihat.html?name=${nameParam}`;
-});
+    row.querySelector(".lihat-btn").addEventListener("click", () => {
+      const nameParam = encodeURIComponent(item.fileName);
+      window.location.href = `lihat.html?name=${nameParam}`;
+    });
 
-
-    // === DOWNLOAD FILE ===
     row.querySelector(".download-btn").addEventListener("click", () => {
       const a = document.createElement("a");
       a.href = item.fileData;
@@ -285,41 +199,37 @@ row.querySelector(".lihat-btn").addEventListener("click", () => {
       document.body.removeChild(a);
     });
 
-    // === EDIT DATA ===
-    row.querySelector(".edit-btn").addEventListener("click", () => {
-      document.getElementById("judul").value = item.judul;
-      document.getElementById("kelompok").value = item.kelompok;
-      document.getElementById("tanggal").value = item.tanggal;
-      document.getElementById("pertemuan").value = item.pertemuan;
-      editIndex = index;
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
+    if (role === "admin") {
+      row.querySelector(".edit-btn").addEventListener("click", () => {
+        document.getElementById("judul").value = item.judul;
+        document.getElementById("kelompok").value = item.kelompok;
+        document.getElementById("tanggal").value = item.tanggal;
+        document.getElementById("pertemuan").value = item.pertemuan;
+        editIndex = index;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
 
-    // === HAPUS DATA ===
-    row.querySelector(".delete-btn").addEventListener("click", () => {
-      if (confirm("Yakin ingin menghapus makalah ini?")) {
-        data.splice(index, 1);
-        localStorage.setItem("makalahData", JSON.stringify(data));
-        loadMakalahTable();
-      }
-    });
+      row.querySelector(".delete-btn").addEventListener("click", () => {
+        if (confirm("Yakin ingin menghapus makalah ini?")) {
+          data.splice(index, 1);
+          localStorage.setItem("makalahData", JSON.stringify(data));
+          loadMakalahTable();
+        }
+      });
+    }
 
     tableBody.appendChild(row);
   });
 }
 
-
-
 // ==============================
-// AUTO LOGOUT SETELAH 20 MENIT LOGIN
+// AUTO LOGOUT 20 MENIT
 // ==============================
-let waktuKunjungan = 20 * 60; // 20 menit dalam detik
+let waktuKunjungan = 20 * 60; 
 
 function mulaiTimerKunjungan() {
   const hitungMundur = setInterval(() => {
     waktuKunjungan--;
-
-    // jika waktu habis
     if (waktuKunjungan <= 0) {
       clearInterval(hitungMundur);
       alert("Waktu kunjungan Anda (20 menit) telah berakhir. Anda akan logout otomatis.");
@@ -328,11 +238,27 @@ function mulaiTimerKunjungan() {
   }, 1000);
 }
 
-// Jalankan timer setelah halaman dimuat dan user login
 document.addEventListener("DOMContentLoaded", function () {
   if (isLoggedIn()) {
     mulaiTimerKunjungan();
+
+    // reset timer jika ada aktivitas
+    ["mousemove","keydown","click","scroll"].forEach(evt => {
+      document.addEventListener(evt, () => waktuKunjungan = 20*60);
+    });
   }
 });
 
+// ==============================
+// MOBILE NAV TOGGLE
+// ==============================
+document.addEventListener("DOMContentLoaded", function () {
+  const menuToggle = document.getElementById("menuToggle");
+  const mobileNav = document.getElementById("mobileNav");
 
+  if (menuToggle && mobileNav) {
+    menuToggle.addEventListener("click", function () {
+      mobileNav.classList.toggle("active");
+    });
+  }
+});
