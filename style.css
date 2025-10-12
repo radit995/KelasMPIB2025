@@ -258,100 +258,103 @@ section {
 }
 
 
-/* ==============================
-   Login Page
-============================== */
-.login-container {
+/* ===== LOGIN SECTION ===== */
+.login-section {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  min-height: 85vh;
+  background-color: #f3f6fa;
+  padding: 40px 20px;
 }
 
+/* ===== CARD LOGIN UTAMA ===== */
 .login-box {
-  background: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-  width: 350px;
+  background: linear-gradient(135deg,
+              rgb(0, 102, 255),
+              rgb(0, 204, 255),
+              rgb(51, 255, 204));
+  border: none;                 /* ❌ Hilangkan border */
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  padding: 40px 35px;
+  width: 380px;
   text-align: center;
+  color: #fff;
+  transition: 0.3s ease;
 }
 
+.login-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+}
+
+/* ===== LOGO ===== */
+/* ===== LOGO (VERSI BESAR TANPA BINGKAI) ===== */
+.login-image {
+  width: 150px;        /* ukuran logo diperbesar */
+  height: 150px;       /* tinggi logo diperbesar */
+  object-fit: cover;   /* pastikan gambar terisi penuh */
+  border-radius: 50%;  /* tetap bulat */
+  background: none;    /* hilangkan bingkai putih */
+  padding: 0;          /* hilangkan padding */
+  margin-bottom: 20px; /* beri jarak dari teks Login */
+}
+
+
+/* ===== TITLE ===== */
 .login-box h2 {
-  margin-bottom: 20px;
-  color: #0077cc;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 25px;
 }
 
+/* ===== FORM LOGIN ===== */
+.login-box form {
+  background: transparent;   /* ❌ Hilangkan background card di dalam */
+  border: none;              /* ❌ Hilangkan border card di dalam */
+  box-shadow: none;          /* ❌ Hilangkan shadow card di dalam */
+  padding: 0;
+}
+
+/* ===== INPUT FIELD ===== */
 .login-box input {
   width: 100%;
   padding: 12px;
   margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
   font-size: 14px;
 }
 
+/* ===== BUTTON LOGIN ===== */
 .login-btn {
   width: 100%;
-  padding: 12px;
-  background: #0077cc;
+  background-color: #0046d6;
   color: #fff;
   border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  font-weight: bold;
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 10px;
+  font-weight: 600;
   cursor: pointer;
   transition: 0.3s;
 }
 
 .login-btn:hover {
-  background: #005fa3;
+  background-color: #0033a8;
 }
 
+/* ===== TEXT BAWAH LOGIN ===== */
 .login-box p {
-  margin-top: 15px;
-  font-size: 14px;
+  margin-top: 20px;
+  font-size: 13px;
+  color: #fff;
 }
 
-.login-box a {
-  color: #0077cc;
-  text-decoration: none;
-}
-
-.login-box a:hover {
-  text-decoration: underline;
-}
-
-
-.login-image {
-  width: 100%;          /* gambar penuh lebar kotak */
-  max-width: 200px;     /* biar tidak terlalu besar */
-  aspect-ratio: 1/1;    /* proporsi persegi */
-  border-radius: 50%;   /* bikin bundar */
-  object-fit: cover;    /* isi gambar proporsional */
-  display: block;
-  margin: 0 auto 15px;  /* posisi tengah + jarak ke tulisan */
-}
-
-
-.login-extra-image {
-  margin: 20px auto;
-  text-align: center;
-}
-
-.login-extra-image img {
-  width: 100%;
-  max-width: 400px; /* ukuran lebih kecil */
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
-
-/* Tambahkan jarak dari navbar */
-.login-container {
-  margin-top: 100px; /* sesuaikan jarak sesuai tinggi navbar */
-  height: calc(80vh - 100px); /* biar tinggi total tetap proporsional */
-}
 
 
 
