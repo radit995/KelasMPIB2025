@@ -747,139 +747,109 @@ form button:hover {
 
 
 
-/* ========== TABEL MAKAALAH ========== */
+/* === BAGIAN DAFTAR MAKALAH (STABIL & RESPONSIF) === */
 .table-section {
-  width: 100%;
-  margin: 25px auto;
-  overflow-x: auto; /* memungkinkan scroll horizontal di HP */
-  -webkit-overflow-scrolling: touch;
+  width: 95%;
+  max-width: 1200px;
+  margin: 40px auto; /* Kurangi margin untuk hemat ruang vertikal */
+  padding: 15px; /* Kurangi padding section */
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-  padding: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* === TABEL === */
 .table-section table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 650px; /* agar tabel tidak mengecil berlebihan */
+  min-width: 600px;
 }
 
 .table-section th,
 .table-section td {
-  border: 1px solid #e0e6ed;
-  padding: 12px 10px;
+  border: 1px solid #dee2e6;
+  padding: 8px 4px; /* Kurangi padding untuk tinggi baris lebih pendek */
   text-align: center;
-  font-size: 14px;
-  white-space: nowrap; /* agar teks tidak turun baris */
+  font-size: 14px; /* Font lebih kecil */
+  color: #2d3436;
+  white-space: nowrap;
+  line-height: 1.2; /* Teks lebih rapat */
 }
 
-.table-section th {
-  background: linear-gradient(135deg, #2c3e50, #34495e);
-  color: white;
+.table-section thead th {
+  background: #2c3e50;
+  color: #fff;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
-.table-section tr:nth-child(even) {
-  background: #f8f9fb;
+.table-section tbody tr:nth-child(even) {
+  background: #f8f9fa;
 }
 
-.table-section tr:hover {
-  background: #eef6ff;
-  transition: 0.3s;
+.table-section tbody tr:hover {
+  background: #e9f2ff;
+  transition: 0.15s ease; /* Transisi lebih cepat */
 }
 
-/* ========== TOMBOL AKSI ========== */
-.action-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.action-buttons button,
-.action-buttons a {
-  padding: 7px 10px;
-  font-size: 13px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  color: white;
-  font-weight: 500;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-  transition: all 0.3s ease;
-}
-
-.lihat-btn {
-  background: linear-gradient(135deg, #3498db, #2e86c1);
-}
-.download-btn {
-  background: linear-gradient(135deg, #2ecc71, #27ae60);
-}
-.edit-btn {
-  background: #f39c12;
-}
-.delete-btn {
-  background: linear-gradient(135deg, #e74c3c, #c0392b);
-}
-
-.lihat-btn:hover,
-.download-btn:hover,
-.edit-btn:hover,
-.delete-btn:hover {
-  transform: scale(1.05);
-  opacity: 0.9;
-}
-
-/* ========== PREVIEW FILE ========== */
-.preview-section {
-  width: 95%;
-  margin: 40px auto;
-  text-align: center;
-}
-
-.preview-section iframe {
-  width: 100%;
-  height: 500px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-}
-
-/* ========== RESPONSIVE DESIGN (HP) ========== */
+/* === RESPONSIVE === */
 @media (max-width: 768px) {
   .table-section {
-    padding: 8px;
-    border-radius: 10px;
-  }
-
-  .table-section table {
-    min-width: 600px; /* agar kolom tetap sejajar */
+    width: 90%;
+    margin: 30px auto; /* Lebih pendek vertikal */
+    padding: 10px;
   }
 
   .table-section th,
   .table-section td {
-    font-size: 12px;
-    padding: 8px 6px;
+    font-size: 11px;
+    padding: 6px 3px; /* Lebih compact di mobile */
   }
 
-  .action-buttons {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 4px;
+  .table-section table {
+    min-width: 450px; /* Kurangi untuk scroll minimal */
   }
 
-  .action-buttons button,
-  .action-buttons a {
-    font-size: 12px;
-    padding: 5px 8px;
-  }
-
-  /* Tambahkan bayangan lembut agar tabel tampak seperti kartu */
-  .table-section {
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  .table-section thead th {
+    z-index: 10;
   }
 }
+
+@media (max-width: 480px) {
+  .table-section {
+    width: 95%;
+    margin: 20px auto;
+    padding: 8px;
+  }
+
+  .table-section th,
+  .table-section td {
+    font-size: 10px; /* Sangat kecil untuk HP mini */
+    padding: 5px 2px;
+    white-space: normal; /* Izinkan wrap untuk hemat ruang */
+  }
+
+  .table-section table {
+    min-width: 400px; /* Lebih pendek horizontal juga */
+  }
+}
+
+
+
+
+
+
 
 
 
