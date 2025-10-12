@@ -70,50 +70,57 @@ header {
 }
 
 
-/* ==============================
-   Mobile Nav
-============================== */
+/* === MOBILE NAV (Transparan dan elegan) === */
 .mobile-nav {
   display: none;
   flex-direction: column;
-  background: #fff;
+  background: rgba(0, 0, 0, 0.75); /* transparan gelap */
   position: absolute;
-  top: 65px; /* sedikit di bawah header */
+  top: 65px;
   right: 15px;
   padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  z-index: 999;
-  min-width: 180px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px); /* efek kaca buram */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 1000;
+  width: 200px;
+  animation: fadeIn 0.3s ease;
 }
 
 .mobile-nav a {
-  padding: 10px;
+  padding: 12px;
   text-decoration: none;
-  color: #333;
-  border-radius: 6px;
+  color: white; /* teks putih */
+  font-weight: 500;
+  border-radius: 8px;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .mobile-nav a:hover {
-  background: #f1f1f1;
+  background: rgba(255, 255, 255, 0.2); /* efek hover lembut */
+  transform: scale(1.05);
 }
 
-/* Saat aktif (tombol ☰ diklik) */
+/* Tombol Logout warna kontras */
+.mobile-nav .cta-button {
+  background: #ffcc00;
+  color: #333 !important;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
 .mobile-nav.active {
   display: flex;
 }
 
-/* ==============================
-   Responsive
-============================== */
-@media (max-width: 768px) {
-  .nav-links {
-    display: none; /* sembunyikan menu desktop */
-  }
-  .hamburger {
-    display: block; /* tampilkan tombol ☰ */
-  }
+/* Animasi muncul */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
+
 
 
 
@@ -529,21 +536,56 @@ section {
 }
 
 
-/* Tentang Kami - Gambar */
-.about-image {
+/* === Bagian Tentang Kami / Kontak Gambar === */
+.about-image,
+.contact-image {
   margin-top: 20px;
+  margin-bottom: 40px; /* ✅ tambahkan jarak bawah agar tidak menempel ke footer */
   display: flex;
   justify-content: center;
+  padding: 0 10px;
 }
 
-.about-image img {
-  width: 100%;          /* supaya lebar penuh mengikuti container */
-  max-width: 600px;     /* batas maksimal biar tidak terlalu besar */
-  height: auto;         /* biar proporsional, tidak terpotong */
-  object-fit: contain;  /* pastikan seluruh gambar terlihat */
-  border-radius: 10px;  /* opsional, bisa dihapus kalau mau kotak tajam */
+.about-image img,
+.contact-image img {
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
+
+/* === Responsif untuk HP === */
+@media (max-width: 768px) {
+  .about-image,
+  .contact-image {
+    margin-top: 15px;
+    margin-bottom: 50px; /* ✅ lebih besar di HP agar footer tidak menempel */
+    padding: 0 15px;
+  }
+
+  .about-image img,
+  .contact-image img {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 8px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.15);
+  }
+}
+
+/* Tambahan opsional untuk keselarasan teks */
+.about-section {
+  text-align: center;
+  padding: 10px 15px;
+}
+
+/* Tambahan opsional: pusatkan teks agar harmonis di HP */
+.about-section {
+  text-align: center;
+  padding: 10px 15px;
+}
+
 
 /* Kontak - Sosial Media */
 .social-links {
@@ -706,21 +748,30 @@ form button:hover {
 
 
 /* ========== TABEL MAKAALAH ========== */
+.table-section {
+  width: 100%;
+  margin: 25px auto;
+  overflow-x: auto; /* memungkinkan scroll horizontal di HP */
+  -webkit-overflow-scrolling: touch;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  padding: 10px;
+}
+
 .table-section table {
   width: 100%;
   border-collapse: collapse;
-  background: #ffffff;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  min-width: 650px; /* agar tabel tidak mengecil berlebihan */
 }
 
 .table-section th,
 .table-section td {
   border: 1px solid #e0e6ed;
-  padding: 14px;
+  padding: 12px 10px;
   text-align: center;
-  font-size: 15px;
+  font-size: 14px;
+  white-space: nowrap; /* agar teks tidak turun baris */
 }
 
 .table-section th {
@@ -742,77 +793,43 @@ form button:hover {
 .action-buttons {
   display: flex;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
 }
 
 .action-buttons button,
 .action-buttons a {
-  padding: 7px 12px;
-  font-size: 14px;
-  border-radius: 8px;
+  padding: 7px 10px;
+  font-size: 13px;
+  border-radius: 6px;
   border: none;
   cursor: pointer;
-  text-decoration: none;
   color: white;
   font-weight: 500;
   box-shadow: 0 2px 5px rgba(0,0,0,0.15);
   transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
 }
 
-.action-buttons button i,
-.action-buttons a i {
-  font-size: 15px;
-}
-
-/* Tombol Lihat */
 .lihat-btn {
   background: linear-gradient(135deg, #3498db, #2e86c1);
 }
-
-.lihat-btn:hover {
-  background: linear-gradient(135deg, #5dade2, #2e86c1);
-  transform: scale(1.05);
-}
-
-/* Tombol Download */
 .download-btn {
   background: linear-gradient(135deg, #2ecc71, #27ae60);
 }
-
-.download-btn:hover {
-  background: linear-gradient(135deg, #58d68d, #229954);
-  transform: scale(1.05);
+.edit-btn {
+  background: #f39c12;
 }
-
-/* Tombol Hapus */
 .delete-btn {
   background: linear-gradient(135deg, #e74c3c, #c0392b);
 }
 
+.lihat-btn:hover,
+.download-btn:hover,
+.edit-btn:hover,
 .delete-btn:hover {
-  background: linear-gradient(135deg, #ec7063, #a93226);
   transform: scale(1.05);
+  opacity: 0.9;
 }
-
-.edit-btn {
-  background: #f39c12;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.edit-btn:hover {
-  background: #d68910;
-}
-
-
 
 /* ========== PREVIEW FILE ========== */
 .preview-section {
@@ -829,30 +846,41 @@ form button:hover {
   box-shadow: 0 3px 8px rgba(0,0,0,0.15);
 }
 
-/* ========== RESPONSIVE DESIGN ========== */
+/* ========== RESPONSIVE DESIGN (HP) ========== */
 @media (max-width: 768px) {
-  form {
-    padding: 20px;
-  }
-
-  .upload-title {
-    font-size: 20px;
-  }
-
-  table th, table td {
-    font-size: 13px;
+  .table-section {
     padding: 8px;
+    border-radius: 10px;
+  }
+
+  .table-section table {
+    min-width: 600px; /* agar kolom tetap sejajar */
+  }
+
+  .table-section th,
+  .table-section td {
+    font-size: 12px;
+    padding: 8px 6px;
   }
 
   .action-buttons {
-    flex-direction: column;
-    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
   }
 
-  .preview-section iframe {
-    height: 350px;
+  .action-buttons button,
+  .action-buttons a {
+    font-size: 12px;
+    padding: 5px 8px;
+  }
+
+  /* Tambahkan bayangan lembut agar tabel tampak seperti kartu */
+  .table-section {
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
   }
 }
+
 
 
 
@@ -869,14 +897,36 @@ footer {
   background: #0077cc;
   color: #fff;
   text-align: center;
-  padding: 15px;
-  margin-top: 30px;
+  padding: 15px 10px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  font-size: 14px;
+  line-height: 1.5;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+}
+
+/* Agar footer selalu di bawah jika konten sedikit */
+body, html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1; /* dorong footer ke bawah */
 }
 
 /* ==============================
    Responsive
 ============================== */
 @media (max-width: 768px) {
+  footer {
+    font-size: 13px;
+    padding: 12px 8px;
+  }
+
   .nav-links {
     display: none;
   }
