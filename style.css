@@ -449,6 +449,95 @@ section {
   font-weight: bold;
 }
 
+/* ===== INFO TERKINI ===== */
+.latest-info {
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.latest-info h2 {
+  font-size: 2rem;
+  color: #38bdf8;
+  margin-bottom: 40px;
+}
+
+/* Container */
+.brochure-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+/* Card Style */
+.brochure-card {
+  background: #1e293b;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  overflow: hidden;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.brochure-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+.brochure-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Isi Card */
+.card-body {
+  padding: 20px;
+  text-align: left;
+}
+
+.card-body h3 {
+  color: #f8fafc;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.card-body p {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+
+/* Responsif */
+@media (max-width: 992px) {
+  .brochure-container {
+    gap: 20px;
+  }
+
+  .brochure-card {
+    max-width: 45%;
+  }
+}
+
+@media (max-width: 768px) {
+  .brochure-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .brochure-card {
+    max-width: 90%;
+  }
+
+  .card-body {
+    text-align: center;
+  }
+}
+
 
 
 /* Struktur Kelas */
@@ -913,3 +1002,4 @@ main {
     align-items: center;
   }
 }
+
