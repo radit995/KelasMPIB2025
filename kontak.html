@@ -9,35 +9,39 @@
 </head>
 
 <body>
-  <header class="navbar">
-    <div class="nav-container">
-      <!-- Logo -->
+    <header class="navbar">
+  <div class="nav-container">
+    <!-- User Info + Logo di kiri -->
+    <div class="left-section">
+      <div id="user-info" class="user-info"></div>
       <a class="logo">Kelas MPI B</a>
-
-      <!-- Tombol hamburger (mobile) -->
-      <button class="menu-toggle" id="menuToggle">☰</button>
-
-      <!-- Menu desktop -->
-      <nav class="nav-links">
-        <a href="index.html">Beranda</a>
-        <a href="tentang.html">Tentang Kami</a>
-        <a href="makalah.html">Kumpulan Makalah</a>
-        <a href="kontak.html" class="active">Kontak</a>
-        <a href="login.html" id="login-btn-desktop">Login</a>
-        <a href="#" id="logout-btn-desktop" class="cta-button" style="display:none;">Logout</a>
-      </nav>
     </div>
 
-    <!-- Menu mobile -->
-    <div class="mobile-nav" id="mobileNav">
+    <!-- Menu desktop -->
+    <nav class="nav-links">
       <a href="index.html">Beranda</a>
       <a href="tentang.html">Tentang Kami</a>
       <a href="makalah.html">Kumpulan Makalah</a>
-      <a href="kontak.html" class="active">Kontak</a>
-      <a href="login.html" id="login-btn-mobile">Login</a>
-      <a href="#" class="cta-button" id="logout-btn-mobile" style="display:none;">Logout</a>
-    </div>
-  </header>
+      <a href="kontak.html">Kontak</a>
+      <a href="login.html" id="login-btn-desktop">Login</a>
+      <a href="login.html" id="logout-btn-desktop" class="cta-button" style="display:none;">Logout</a>
+    </nav>
+
+    <!-- Tombol hamburger -->
+    <button class="menu-toggle" id="menuToggle">☰</button>
+  </div>
+
+  <!-- Menu mobile -->
+  <div class="mobile-nav" id="mobileNav">
+    <div id="user-info-mobile" class="user-info-mobile"></div>
+    <a href="index.html">Beranda</a>
+    <a href="tentang.html">Tentang Kami</a>
+    <a href="makalah.html">Kumpulan Makalah</a>
+    <a href="kontak.html">Kontak</a>
+    <a href="login.html" id="login-btn-mobile">Login</a>
+    <a href="login.html" id="logout-btn-mobile" class="cta-button" style="display:none;">Logout</a>
+  </div>
+</header>
 
   <main>
     <!-- Kontak Section -->
@@ -48,10 +52,10 @@
 
       <!-- Sosial Media -->
       <div class="social-links">
-        <a href="https://instagram.com/kelasmpib" target="_blank" class="instagram">
+        <a href="https://www.instagram.com/mpi.b_uinpo25?igsh=MWFpaHZ1dHRrMHhvNQ==" target="_blank" class="instagram">
           <i class="fab fa-instagram"></i> Instagram
         </a>
-        <a href="https://tiktok.com/@kelasmpib" target="_blank" class="tiktok">
+        <a href="https://www.tiktok.com/@management25_b?_t=ZS-90VSv0r0ypw&_r=1" target="_blank" class="tiktok">
           <i class="fab fa-tiktok"></i> TikTok
         </a>
       </div>

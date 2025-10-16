@@ -11,10 +11,6 @@
    Header & Navbar
 ============================== */
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 30px;
   background: #0077cc;
   color: #fff;
   position: sticky;
@@ -22,39 +18,59 @@ header {
   z-index: 1000;
 }
 
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 25px;
+  flex-wrap: wrap;
+}
+
+/* === User Info di kiri === */
+.user-info {
+  color: white;
+  font-weight: bold;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+/* === Logo === */
 .logo {
   font-weight: bold;
   font-size: 20px;
   color: #fff;
   text-decoration: none;
+  margin-right: 40px; /* jarak dengan menu navigasi */
 }
 
-/* Menu desktop */
+/* === Menu Desktop === */
 .nav-links {
   display: flex;
-  gap: 20px;
+  align-items: center;
+  gap: 25px;
 }
 
 .nav-links a {
   color: #fff;
   text-decoration: none;
   font-weight: 500;
-  transition: 0.3s;
 }
 
 .nav-links a:hover {
   text-decoration: underline;
 }
 
-/* Tombol CTA umum (misalnya Login) */
+/* === Tombol Logout / CTA === */
 .cta-button {
   background: #ffcc00;
   color: #333 !important;
   padding: 8px 15px;
-  border-radius: 5px;
+  border-radius: 6px;
   font-weight: bold;
   text-decoration: none;
-  display: inline-block;
   transition: 0.3s;
 }
 
@@ -62,25 +78,27 @@ header {
   background: #e6b800;
 }
 
-/* Tombol Logout khusus */
-#logout-btn-desktop,
-#logout-btn-mobile {
-  background: #ffcc00;   /* kuning */
-  color: #333 !important;
+/* === Tombol Hamburger === */
+.menu-toggle {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 26px;
+  cursor: pointer;
+  display: none; /* sembunyikan di desktop */
 }
 
-
-/* === MOBILE NAV (Transparan dan elegan) === */
+/* === MOBILE NAV === */
 .mobile-nav {
   display: none;
   flex-direction: column;
-  background: rgba(0, 0, 0, 0.75); /* transparan gelap */
+  background: rgba(0, 0, 0, 0.85);
   position: absolute;
   top: 65px;
   right: 15px;
   padding: 15px;
   border-radius: 12px;
-  backdrop-filter: blur(10px); /* efek kaca buram */
+  backdrop-filter: blur(10px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   z-index: 1000;
   width: 200px;
@@ -90,25 +108,15 @@ header {
 .mobile-nav a {
   padding: 12px;
   text-decoration: none;
-  color: white; /* teks putih */
+  color: white;
   font-weight: 500;
   border-radius: 8px;
   transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .mobile-nav a:hover {
-  background: rgba(255, 255, 255, 0.2); /* efek hover lembut */
+  background: rgba(255, 255, 255, 0.2);
   transform: scale(1.05);
-}
-
-/* Tombol Logout warna kontras */
-.mobile-nav .cta-button {
-  background: #ffcc00;
-  color: #333 !important;
-  font-weight: bold;
-  text-align: center;
-  border-radius: 8px;
-  margin-top: 10px;
 }
 
 .mobile-nav.active {
@@ -120,6 +128,189 @@ header {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* Responsif */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; /* sembunyikan menu desktop */
+  }
+
+  .menu-toggle {
+    display: block; /* tampilkan tombol hamburger */
+  }
+
+  .logo {
+    margin-right: 15px;
+  }
+
+  .user-info {
+    font-size: 0.9em;
+  }
+}
+
+
+/* Struktur utama */
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 25px;
+  flex-wrap: wrap;
+}
+
+/* === User info + logo di kiri === */
+.left-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* === User Info === */
+.user-info {
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+}
+
+/* === Logo di samping user info === */
+.logo {
+  font-weight: bold;
+  font-size: 18px;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* === Menu desktop === */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+/* === Tombol Hamburger === */
+.menu-toggle {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 26px;
+  cursor: pointer;
+  display: none;
+  margin-left: 10px;
+}
+
+/* === MOBILE === */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .left-section {
+    flex: 1;
+  }
+}
+
+
+/* ==========================
+   NAVBAR UMUM
+========================== */
+header.navbar {
+  background: #0077cc;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+}
+
+/* Bagian kiri: user info + logo */
+.left-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+
+.user-info {
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 16px;
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Tombol hamburger */
+.menu-toggle {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  display: none;
+}
+
+/* ==========================
+   RESPONSIVE (MOBILE)
+========================== */
+@media (max-width: 768px) {
+  .nav-container {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    padding: 10px 14px;
+  }
+
+  .left-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 1;
+    overflow: hidden;
+  }
+
+  .user-info {
+    font-size: 12px;
+    max-width: 130px; /* biar tidak terlalu panjang */
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .logo {
+    font-size: 14px;
+  }
+
+  .menu-toggle {
+    display: block;
+    font-size: 22px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+}
+
+
+
 
 
 
@@ -261,11 +452,12 @@ section {
 /* ===== LOGIN SECTION ===== */
 .login-section {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 85vh;
+  justify-content: center;   /* Tengah horizontal */
+  align-items: center;       /* Tengah vertikal */
+  min-height: 100vh;         /* Penuhi tinggi layar */
   background-color: #f3f6fa;
-  padding: 40px 20px;
+  padding: 0 15px;           /* 🔹 Jarak kanan-kiri seragam */
+  box-sizing: border-box;
 }
 
 /* ===== CARD LOGIN UTAMA ===== */
@@ -274,11 +466,13 @@ section {
               rgb(0, 102, 255),
               rgb(0, 204, 255),
               rgb(51, 255, 204));
-  border: none;                 /* ❌ Hilangkan border */
+  border: none;
   border-radius: 20px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-  padding: 40px 35px;
-  width: 380px;
+  padding: 30px 25px;
+  width: 100%;
+  max-width: 360px;          /* 🔹 Batasi lebar agar tetap proporsional */
+  margin: 0 auto;            /* 🔹 Posisikan card tepat di tengah */
   text-align: center;
   color: #fff;
   transition: 0.3s ease;
@@ -288,6 +482,19 @@ section {
   transform: translateY(-5px);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
 }
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 480px) {
+  .login-box {
+    padding: 25px 20px;
+    border-radius: 15px;
+    max-width: 320px;        /* 🔹 Sedikit lebih kecil di HP */
+  }
+}
+
+
+
+
 
 /* ===== LOGO ===== */
 /* ===== LOGO (VERSI BESAR TANPA BINGKAI) ===== */
@@ -540,6 +747,10 @@ section {
 
 
 
+
+
+
+
 /* Struktur Kelas */
 .struktur {
   padding: 50px 20px;
@@ -755,7 +966,7 @@ section {
 }
 
 
-/* ========== SECTION UPLOAD MAKAALAH ========== */
+/* ========== SECTION UPLOAD MAKALAH ========== */
 .upload-section, .table-section {
   padding: 40px 6%;
   max-width: 1100px;
@@ -835,6 +1046,33 @@ form button:hover {
 }
 
 
+/* ========== GROUP TOMBOL ========== */
+.button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.button-group button {
+  flex: 1;
+}
+
+/* Warna khusus untuk tombol Update dan Batal */
+#updateBtn {
+  background: linear-gradient(135deg, #16a34a, #065f46);
+}
+#updateBtn:hover {
+  background: linear-gradient(135deg, #22c55e, #047857);
+}
+
+#cancelBtn {
+  background: linear-gradient(135deg, #dc2626, #7f1d1d);
+}
+#cancelBtn:hover {
+  background: linear-gradient(135deg, #ef4444, #991b1b);
+}
+
+
 
 
 
@@ -843,36 +1081,37 @@ form button:hover {
 .table-section {
   width: 95%;
   max-width: 1200px;
-  margin: 40px auto; /* Kurangi margin untuk hemat ruang vertikal */
-  padding: 15px; /* Kurangi padding section */
+  margin: 30px auto;
+  padding: 15px;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
+/* === WRAPPER RESPONSIVE === */
 .table-responsive {
   width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
+  overflow-x: auto; /* Memungkinkan scroll horizontal jika diperlukan */
+  -webkit-overflow-scrolling: touch; /* Haluskan scrolling di iOS */
 }
 
 /* === TABEL === */
 .table-section table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 600px;
+  min-width: 500px; /* Minimum lebar untuk desktop */
 }
 
 .table-section th,
 .table-section td {
   border: 1px solid #dee2e6;
-  padding: 8px 4px; /* Kurangi padding untuk tinggi baris lebih pendek */
+  padding: 8px 6px;
   text-align: center;
-  font-size: 14px; /* Font lebih kecil */
+  font-size: 14px;
   color: #2d3436;
-  white-space: nowrap;
-  line-height: 1.2; /* Teks lebih rapat */
+  line-height: 1.3;
+  word-wrap: break-word; /* Pastikan teks panjang bisa patah baris */
+  overflow-wrap: break-word; /* Alternatif untuk browser lama */
 }
 
 .table-section thead th {
@@ -883,7 +1122,7 @@ form button:hover {
   letter-spacing: 0.5px;
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 2;
 }
 
 .table-section tbody tr:nth-child(even) {
@@ -892,52 +1131,181 @@ form button:hover {
 
 .table-section tbody tr:hover {
   background: #e9f2ff;
-  transition: 0.15s ease; /* Transisi lebih cepat */
+  transition: 0.2s ease; /* Transisi halus untuk hover/tap */
 }
 
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
   .table-section {
-    width: 90%;
-    margin: 30px auto; /* Lebih pendek vertikal */
+    width: 95%;
+    margin: 20px auto;
     padding: 10px;
+  }
+
+  .table-section table {
+    min-width: 450px; /* Sesuaikan untuk tablet */
   }
 
   .table-section th,
   .table-section td {
-    font-size: 11px;
-    padding: 6px 3px; /* Lebih compact di mobile */
-  }
-
-  .table-section table {
-    min-width: 450px; /* Kurangi untuk scroll minimal */
+    font-size: 12px;
+    padding: 6px 4px;
   }
 
   .table-section thead th {
-    z-index: 10;
+    white-space: normal;
+    font-size: 12px;
+    line-height: 1.2;
   }
 }
 
 @media (max-width: 480px) {
   .table-section {
-    width: 95%;
-    margin: 20px auto;
+    width: 100%;
+    margin: 10px auto;
     padding: 8px;
+  }
+
+  .table-section table {
+    min-width: 300px; /* Kurangi agar lebih sesuai dengan HP kecil, misalnya 320px layar */
   }
 
   .table-section th,
   .table-section td {
-    font-size: 10px; /* Sangat kecil untuk HP mini */
-    padding: 5px 2px;
-    white-space: normal; /* Izinkan wrap untuk hemat ruang */
+    font-size: 11px;
+    padding: 5px 3px;
+    white-space: normal;
+    word-wrap: break-word; /* Pastikan teks tidak memaksa lebar */
   }
 
-  .table-section table {
-    min-width: 400px; /* Lebih pendek horizontal juga */
+  .table-section thead th {
+    font-size: 11px;
+    padding: 6px 4px;
+  }
+
+  /* Opsional: Sembunyikan kolom tambahan jika tabel terlalu lebar */
+  .table-section th:nth-child(4),
+  .table-section td:nth-child(4) {
+    display: none; /* Sembunyikan kolom ke-4 di HP, jika diperlukan */
+  }
+}
+
+/* ====== SEMBUNYIKAN KOLOM "PERTEMUAN" ====== */
+.table-section th:nth-child(4),
+.table-section td:nth-child(4) {
+  display: none;
+}
+
+/* ====== SEMBUNYIKAN KOLOM "NAMA FILE" ====== */
+.table-section th:nth-child(5),
+.table-section td:nth-child(5) {
+  display: none;
+}
+
+
+@media (max-width: 480px) {
+  /* Sembunyikan hanya di HP */
+  .table-section th:nth-child(4),
+  .table-section td:nth-child(4) {
+    display: none;
   }
 }
 
 
+/* === Tombol Aksi di Tabel === */
+.aksi-col {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #fff;
+  transition: 0.2s;
+}
+
+.btn.lihat { background: #007bff; }
+.btn.download { background: #ffc107; color: #000; }
+.btn.edit { background: #28a745; }
+.btn.hapus { background: #dc3545; }
+
+.btn:hover {
+  opacity: 0.85;
+}
+
+
+
+/* ===============================
+   makalah.css — Kumpulan Makalah
+   =============================== */
+
+/* Section utama */
+.upload-section {
+  max-width: 1100px;
+  margin: 2rem auto;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.upload-title {
+  font-size: 1.8rem;
+  color: #38bdf8;
+  margin-bottom: 0.5rem;
+}
+
+.upload-subtitle {
+  color: #94a3b8;
+  margin-bottom: 2rem;
+}
+
+/* Grid daftar mata kuliah */
+.matkul-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.2rem;
+}
+
+.matkul-card {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 1.2rem;
+  border-radius: 15px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+.matkul-card:hover {
+  transform: translateY(-5px);
+  background: #0ea5e9;
+  color: #fff;
+}
+
+.matkul-card i {
+  font-size: 1.2rem;
+}
+
+/* Responsif untuk mobile */
+@media (max-width: 768px) {
+  .upload-title {
+    font-size: 1.5rem;
+  }
+
+  .matkul-card {
+    font-size: 0.95rem;
+  }
+}
 
 
 
@@ -1002,4 +1370,3 @@ main {
     align-items: center;
   }
 }
-

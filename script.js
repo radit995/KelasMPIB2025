@@ -87,140 +87,8 @@ document.addEventListener("DOMContentLoaded", function () {
   if (logoutMobile) logoutMobile.addEventListener("click", logout);
 });
 
-// ==============================
-// DATA MAKALAH
-// ==============================
-let editIndex = null;
 
-document.addEventListener("DOMContentLoaded", loadMakalahTable);
 
-document.getElementById("makalahForm")?.addEventListener("submit", async function (e) {
-  e.preventDefault();
-
-  const judul = document.getElementById("judul").value.trim();
-  const kelompok = document.getElementById("kelompok").value.trim();
-  const tanggal = document.getElementById("tanggal").value;
-  const pertemuan = document.getElementById("pertemuan").value;
-  const file = document.getElementById("file").files[0];
-
-  if (!judul || !kelompok || !tanggal || !pertemuan) {
-    alert("Lengkapi semua data terlebih dahulu!");
-    return;
-  }
-
-  let data = JSON.parse(localStorage.getItem("makalahData")) || [];
-
-  const toBase64 = (file) =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (err) => reject(err);
-      reader.readAsDataURL(file);
-    });
-
-  let fileData = null;
-  if (file) fileData = await toBase64(file);
-
-  if (editIndex !== null) {
-    const existing = data[editIndex];
-    data[editIndex] = {
-      judul,
-      kelompok,
-      tanggal,
-      pertemuan,
-      fileName: file ? file.name : existing.fileName,
-      fileData: file ? fileData : existing.fileData
-    };
-    alert("✅ Data makalah berhasil diperbarui!");
-    editIndex = null;
-  } else {
-    if (!file) {
-      alert("Pilih file makalah terlebih dahulu!");
-      return;
-    }
-    data.push({
-      judul,
-      kelompok,
-      tanggal,
-      pertemuan,
-      fileName: file.name,
-      fileData
-    });
-    alert("✅ Makalah baru berhasil ditambahkan!");
-  }
-
-  localStorage.setItem("makalahData", JSON.stringify(data));
-  this.reset();
-  loadMakalahTable();
-});
-
-function loadMakalahTable() {
-  const tableBody = document.querySelector("#makalahTable tbody");
-  if (!tableBody) return;
-  const data = JSON.parse(localStorage.getItem("makalahData")) || [];
-
-  tableBody.innerHTML = "";
-
-  if (data.length === 0) {
-    tableBody.innerHTML = `<tr><td colspan="6">Belum ada makalah diunggah.</td></tr>`;
-    return;
-  }
-
-  const role = getUserRole();
-
-  data.forEach((item, index) => {
-    const row = document.createElement("tr");
-
-    row.innerHTML = `
-      <td>${item.judul}</td>
-      <td>${item.kelompok}</td>
-      <td>${item.tanggal}</td>
-      <td>${item.pertemuan}</td>
-      <td>${item.fileName}</td>
-      <td class="action-buttons">
-        <button class="lihat-btn"><i class="fa fa-eye"></i></button>
-        <button class="download-btn"><i class="fa fa-download"></i></button>
-        ${role === "admin" ? `<button class="edit-btn"><i class="fa fa-pen"></i></button>
-        <button class="delete-btn"><i class="fa fa-trash"></i></button>` : ""}
-      </td>
-    `;
-
-    row.querySelector(".lihat-btn").addEventListener("click", () => {
-      const nameParam = encodeURIComponent(item.fileName);
-      window.location.href = `lihat.html?name=${nameParam}`;
-    });
-
-    row.querySelector(".download-btn").addEventListener("click", () => {
-      const a = document.createElement("a");
-      a.href = item.fileData;
-      a.download = item.fileName;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    });
-
-    if (role === "admin") {
-      row.querySelector(".edit-btn").addEventListener("click", () => {
-        document.getElementById("judul").value = item.judul;
-        document.getElementById("kelompok").value = item.kelompok;
-        document.getElementById("tanggal").value = item.tanggal;
-        document.getElementById("pertemuan").value = item.pertemuan;
-        editIndex = index;
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
-
-      row.querySelector(".delete-btn").addEventListener("click", () => {
-        if (confirm("Yakin ingin menghapus makalah ini?")) {
-          data.splice(index, 1);
-          localStorage.setItem("makalahData", JSON.stringify(data));
-          loadMakalahTable();
-        }
-      });
-    }
-
-    tableBody.appendChild(row);
-  });
-}
 
 // ==============================
 // AUTO LOGOUT 20 MENIT
@@ -262,3 +130,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+
+
