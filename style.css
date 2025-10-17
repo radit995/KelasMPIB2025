@@ -1281,14 +1281,7 @@ form button:hover {
 }
 
 
-/* === Tombol Aksi di Tabel === */
-.aksi-col {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 6px;
-}
-
+/* === TOMBOL AKSI MAKALAH === */
 .btn {
   padding: 6px 10px;
   border: none;
@@ -1299,14 +1292,23 @@ form button:hover {
   transition: 0.2s;
 }
 
-.btn.lihat { background: #007bff; }
-.btn.download { background: #ffc107; color: #000; }
-.btn.edit { background: #28a745; }
-.btn.hapus { background: #dc3545; }
+.btn.lihat-btn { background: #007bff; }      /* Biru */
+.btn.download-btn { background: #ffc107; color: #000; } /* Kuning */
+.btn.edit-btn { background: #28a745; }       /* Hijau */
+.btn.delete-btn { background: #dc3545; }     /* Merah */
 
-.btn:hover {
-  opacity: 0.85;
+.btn:hover { opacity: 0.85; transform: translateY(-1px); }
+.btn:active { transform: scale(0.95); }
+
+/* Kolom aksi */
+.aksi-col {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
 }
+
+
 
 
 

@@ -220,16 +220,15 @@ function renderTable(data) {
   data.forEach((item) => {
     const tr = document.createElement("tr");
 
-    let tombolAksi = `
-      <button class="lihat-btn">Lihat</button>
-      <button class="download-btn">Download</button>
+        let tombolAksi = `
+      <button class="btn lihat-btn">Lihat</button>
+      <button class="btn download-btn">Download</button>
     `;
 
-    // Tambahkan Edit & Hapus hanya untuk Admin
     if (role === "admin" && email === "mpiadmin@gmail.com") {
       tombolAksi += `
-        <button class="edit-btn">Edit</button>
-        <button class="delete-btn">Hapus</button>
+        <button class="btn edit-btn">Edit</button>
+        <button class="btn delete-btn">Hapus</button>
       `;
     }
 
