@@ -27,6 +27,16 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ==============================
+// Ambil Role Login
+// ==============================
+function getUserRole() {
+  return localStorage.getItem("userRole") || "user";
+}
+function getUserEmail() {
+  return localStorage.getItem("userEmail") || "";
+}
+
+// ==============================
 // Form Submit
 // ==============================
 const form = document.getElementById("makalahForm");
@@ -37,6 +47,14 @@ const cancelBtn = document.getElementById("cancelBtn");
 if (form) {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    const role = getUserRole();
+    const email = getUserEmail();
+
+    if (role !== "admin" || email !== "mpiadmin@gmail.com") {
+      alert("❌ Hanya admin yang bisa menambah makalah!");
+      return;
+    }
 
     const judul = document.getElementById("judul")?.value.trim();
     const kelompok = document.getElementById("kelompok")?.value.trim();
@@ -68,7 +86,6 @@ if (form) {
     const tx = db.transaction("makalahData", "readwrite");
     const store = tx.objectStore("makalahData");
 
-    // Tambah baru
     store.add({
       judul,
       kelompok,
@@ -104,8 +121,18 @@ function exitEditMode() {
   form.reset();
 }
 
-// Tombol Update
+// ==============================
+// Update Data
+// ==============================
 updateBtn.addEventListener("click", async () => {
+  const role = getUserRole();
+  const email = getUserEmail();
+
+  if (role !== "admin" || email !== "mpiadmin@gmail.com") {
+    alert("❌ Hanya admin yang bisa mengedit makalah!");
+    return;
+  }
+
   if (editIndex === null) return alert("Tidak ada data yang sedang diedit!");
 
   const judul = document.getElementById("judul").value.trim();
@@ -159,7 +186,6 @@ updateBtn.addEventListener("click", async () => {
   };
 });
 
-// Tombol Batal
 cancelBtn.addEventListener("click", () => {
   exitEditMode();
 });
@@ -182,6 +208,9 @@ function renderTable(data) {
   const tbody = document.querySelector("#makalahTable tbody");
   if (!tbody) return;
 
+  const role = getUserRole();
+  const email = getUserEmail();
+
   tbody.innerHTML = "";
   if (!data.length) {
     tbody.innerHTML = `<tr><td colspan="6">Belum ada makalah.</td></tr>`;
@@ -190,26 +219,35 @@ function renderTable(data) {
 
   data.forEach((item) => {
     const tr = document.createElement("tr");
+
+    let tombolAksi = `
+      <button class="lihat-btn">Lihat</button>
+      <button class="download-btn">Download</button>
+    `;
+
+    // Tambahkan Edit & Hapus hanya untuk Admin
+    if (role === "admin" && email === "mpiadmin@gmail.com") {
+      tombolAksi += `
+        <button class="edit-btn">Edit</button>
+        <button class="delete-btn">Hapus</button>
+      `;
+    }
+
     tr.innerHTML = `
       <td>${item.judul}</td>
       <td>${item.kelompok}</td>
       <td>${item.tanggal}</td>
       <td>${item.pertemuan}</td>
       <td>${item.fileName}</td>
-      <td>
-        <button class="lihat-btn">Lihat</button>
-        <button class="download-btn">Download</button>
-        <button class="edit-btn">Edit</button>
-        <button class="delete-btn">Hapus</button>
-      </td>
+      <td>${tombolAksi}</td>
     `;
 
-    // Lihat
+    // Tombol Lihat
     tr.querySelector(".lihat-btn").addEventListener("click", () => {
-      window.location.href = `lihat.html?id=${item.id}&matkul=dasar-dasar-akuntansi`;
+      window.location.href = `lihat.html?id=${item.id}&matkul=filsafat-pendidikan`;
     });
 
-    // Download
+    // Tombol Download
     tr.querySelector(".download-btn").addEventListener("click", () => {
       const a = document.createElement("a");
       a.href = item.fileData;
@@ -217,35 +255,79 @@ function renderTable(data) {
       a.click();
     });
 
-    // Edit
-    tr.querySelector(".edit-btn").addEventListener("click", async () => {
-      const data = await getById(item.id);
-      if (!data) {
-        alert("❌ Data tidak ditemukan untuk diedit!");
-        return;
-      }
+    // Edit hanya admin
+    if (role === "admin" && email === "mpiadmin@gmail.com") {
+      tr.querySelector(".edit-btn").addEventListener("click", async () => {
+        const data = await getById(item.id);
+        if (!data) {
+          alert("❌ Data tidak ditemukan!");
+          return;
+        }
 
-      document.getElementById("judul").value = data.judul;
-      document.getElementById("kelompok").value = data.kelompok;
-      document.getElementById("tanggal").value = data.tanggal;
-      document.getElementById("pertemuan").value = data.pertemuan;
-      editIndex = data.id;
+        document.getElementById("judul").value = data.judul;
+        document.getElementById("kelompok").value = data.kelompok;
+        document.getElementById("tanggal").value = data.tanggal;
+        document.getElementById("pertemuan").value = data.pertemuan;
+        editIndex = data.id;
 
-      enterEditMode();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
+        enterEditMode();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
 
-    // Hapus
-    tr.querySelector(".delete-btn").addEventListener("click", () => {
-      if (confirm("Yakin ingin menghapus makalah ini?")) deleteById(item.id);
-    });
+      tr.querySelector(".delete-btn").addEventListener("click", () => {
+        if (confirm("Yakin ingin menghapus makalah ini?")) deleteById(item.id);
+      });
+    }
 
     tbody.appendChild(tr);
   });
 }
 
 // ==============================
-// Search
+// Fungsi Hapus (Admin Only)
+// ==============================
+function deleteById(id) {
+  const role = getUserRole();
+  const email = getUserEmail();
+
+  if (role !== "admin" || email !== "mpiadmin@gmail.com") {
+    alert("❌ Anda tidak punya izin menghapus!");
+    return;
+  }
+
+  const tx = db.transaction("makalahData", "readwrite");
+  const store = tx.objectStore("makalahData");
+  store.delete(id);
+  tx.oncomplete = () => {
+    alert("🗑️ Makalah berhasil dihapus!");
+    loadTable();
+    populateFilterOptions();
+  };
+}
+
+// ==============================
+// Helper DB
+// ==============================
+function getAll() {
+  return new Promise((res) => {
+    const tx = db.transaction("makalahData", "readonly");
+    const store = tx.objectStore("makalahData");
+    const req = store.getAll();
+    req.onsuccess = () => res(req.result);
+  });
+}
+
+function getById(id) {
+  return new Promise((res) => {
+    const tx = db.transaction("makalahData", "readonly");
+    const store = tx.objectStore("makalahData");
+    const req = store.get(id);
+    req.onsuccess = () => res(req.result);
+  });
+}
+
+// ==============================
+// Filter & Search
 // ==============================
 const searchInput = document.getElementById("searchInput");
 if (searchInput) {
@@ -263,9 +345,6 @@ if (searchInput) {
   });
 }
 
-// ==============================
-// Filter Pertemuan
-// ==============================
 const filterSelect = document.createElement("select");
 filterSelect.id = "filterPertemuan";
 filterSelect.style.marginLeft = "10px";
@@ -288,36 +367,4 @@ async function populateFilterOptions() {
     o.textContent = `Pertemuan ${p}`;
     filterSelect.appendChild(o);
   });
-}
-
-// ==============================
-// IndexedDB Helper
-// ==============================
-function getAll() {
-  return new Promise((res) => {
-    const tx = db.transaction("makalahData", "readonly");
-    const store = tx.objectStore("makalahData");
-    const req = store.getAll();
-    req.onsuccess = () => res(req.result);
-  });
-}
-
-function getById(id) {
-  return new Promise((res) => {
-    const tx = db.transaction("makalahData", "readonly");
-    const store = tx.objectStore("makalahData");
-    const req = store.get(id);
-    req.onsuccess = () => res(req.result);
-  });
-}
-
-function deleteById(id) {
-  const tx = db.transaction("makalahData", "readwrite");
-  const store = tx.objectStore("makalahData");
-  store.delete(id);
-  tx.oncomplete = () => {
-    alert("🗑️ Makalah berhasil dihapus!");
-    loadTable();
-    populateFilterOptions();
-  };
 }

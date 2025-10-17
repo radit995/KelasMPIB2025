@@ -26,7 +26,7 @@ function logout() {
 }
 
 // ==============================
-// VALIDASI LOGIN (UNTUK login.html)
+// VALIDASI LOGIN
 // ==============================
 function validateLogin(event) {
   event.preventDefault();
@@ -38,6 +38,7 @@ function validateLogin(event) {
     localStorage.setItem("loggedIn", "true");
     localStorage.setItem("userEmail", email);
     localStorage.setItem("userRole", users[email].role);
+
     alert("Login berhasil!");
     window.location.href = "index.html";
   } else {
@@ -68,9 +69,19 @@ document.addEventListener("DOMContentLoaded", function () {
     if (loginMobile) loginMobile.style.display = "none";
     if (logoutMobile) logoutMobile.style.display = "inline-block";
 
-    if (uploadSection) uploadSection.style.display = role === "admin" ? "block" : "none";
+    if (page === "makalah.html") {
+      if (email === "mpiuser@gmail.com" || email === "mpiadmin@gmail.com") {
+        loadMakalahTable();
+      } else {
+        alert("Anda tidak memiliki akses ke halaman ini!");
+        window.location.href = "login.html";
+      }
+    }
 
-    loadMakalahTable();
+    // sembunyikan upload jika user biasa
+    if (uploadSection && role !== "admin") {
+      uploadSection.style.display = "none";
+    }
   } else {
     if (page !== "login.html") {
       window.location.href = "login.html";
@@ -86,6 +97,139 @@ document.addEventListener("DOMContentLoaded", function () {
   if (logoutDesktop) logoutDesktop.addEventListener("click", logout);
   if (logoutMobile) logoutMobile.addEventListener("click", logout);
 });
+
+// ==============================
+// LOAD DATA MAKALAH
+// ==============================
+function loadMakalahTable() {
+  const transaction = db.transaction("makalahData", "readonly");
+  const store = transaction.objectStore("makalahData");
+  const request = store.getAll();
+
+  request.onsuccess = (e) => {
+    const makalahData = e.target.result;
+    const tableBody = document.getElementById("makalahTableBody");
+    tableBody.innerHTML = "";
+
+    const role = getUserRole();
+
+    makalahData.forEach((data) => {
+      const row = document.createElement("tr");
+
+      // Tombol aksi — Edit & Hapus hanya admin
+      let actionButtons = `
+        <button class="lihat-btn" onclick="lihatMakalah(${data.id})">Lihat</button>
+        <button class="download-btn" onclick="downloadMakalah(${data.id})">Download</button>
+      `;
+
+      if (role === "admin") {
+        actionButtons += `
+          <button class="edit-btn" onclick="editMakalah(${data.id})">Edit</button>
+          <button class="hapus-btn" onclick="hapusMakalah(${data.id})">Hapus</button>
+        `;
+      }
+
+      row.innerHTML = `
+        <td>${data.judul}</td>
+        <td>${data.kelompok}</td>
+        <td>${data.tanggal || "-"}</td>
+        <td>${actionButtons}</td>
+      `;
+
+      tableBody.appendChild(row);
+    });
+  };
+}
+
+// ==============================
+// FUNGSI EDIT (ADMIN ONLY)
+// ==============================
+function editMakalah(id) {
+  const role = getUserRole();
+  if (role !== "admin") {
+    alert("❌ Anda tidak memiliki izin untuk mengedit makalah!");
+    return;
+  }
+  window.location.href = `edit.html?id=${id}`;
+}
+
+// ==============================
+// FUNGSI HAPUS (ADMIN ONLY)
+// ==============================
+function hapusMakalah(id) {
+  const role = getUserRole();
+
+  // Cegah akses non-admin meskipun lewat console
+  if (role !== "admin" || getUserEmail() !== "mpiadmin@gmail.com") {
+    alert("❌ Anda tidak memiliki izin untuk menghapus makalah!");
+    return;
+  }
+
+  if (confirm("Yakin ingin menghapus makalah ini?")) {
+    const transaction = db.transaction("makalahData", "readwrite");
+    const store = transaction.objectStore("makalahData");
+    store.delete(id);
+
+    transaction.oncomplete = () => {
+      alert("✅ Makalah berhasil dihapus!");
+      loadMakalahTable();
+    };
+  }
+}
+
+// ==============================
+// FUNGSI UPLOAD (ADMIN ONLY)
+// ==============================
+function uploadMakalah(judul, kelompok, tanggal, fileUrl) {
+  const role = getUserRole();
+
+  if (role !== "admin" || getUserEmail() !== "mpiadmin@gmail.com") {
+    alert("❌ Hanya admin yang dapat mengupload makalah!");
+    return;
+  }
+
+  const transaction = db.transaction("makalahData", "readwrite");
+  const store = transaction.objectStore("makalahData");
+  const newData = {
+    id: Date.now(),
+    judul,
+    kelompok,
+    tanggal,
+    fileUrl,
+  };
+
+  store.add(newData);
+  transaction.oncomplete = () => {
+    alert("✅ Makalah berhasil diupload!");
+    loadMakalahTable();
+  };
+}
+
+// ==============================
+// DOWNLOAD & LIHAT
+// ==============================
+function downloadMakalah(id) {
+  const transaction = db.transaction("makalahData", "readonly");
+  const store = transaction.objectStore("makalahData");
+  const request = store.get(id);
+
+  request.onsuccess = (e) => {
+    const data = e.target.result;
+    if (data && data.fileUrl) {
+      const a = document.createElement("a");
+      a.href = data.fileUrl;
+      a.download = data.judul;
+      a.click();
+    }
+  };
+}
+
+function lihatMakalah(id) {
+  window.location.href = `lihat.html?id=${id}`;
+}
+
+
+
 
 
 

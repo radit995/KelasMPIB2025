@@ -682,7 +682,7 @@ section {
 .brochure-card {
   background: #1e293b;
   border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
   overflow: hidden;
   max-width: 380px;
   display: flex;
@@ -692,12 +692,15 @@ section {
 
 .brochure-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
 
+/* Gambar Full, Tidak Terpotong */
 .brochure-card img {
   width: 100%;
-  height: auto;
+  height: 230px; /* tinggi seragam semua */
+  object-fit: contain; /* gambar tidak terpotong */
+  background-color: #0f172a; /* warna latar belakang */
   display: block;
 }
 
@@ -719,7 +722,7 @@ section {
   line-height: 1.6;
 }
 
-/* Responsif */
+/* Responsif Tablet */
 @media (max-width: 992px) {
   .brochure-container {
     gap: 20px;
@@ -730,6 +733,7 @@ section {
   }
 }
 
+/* Responsif HP */
 @media (max-width: 768px) {
   .brochure-container {
     flex-direction: column;
@@ -740,10 +744,75 @@ section {
     max-width: 90%;
   }
 
+  .brochure-card img {
+    height: 200px;
+  }
+
   .card-body {
     text-align: center;
   }
 }
+
+/* Container */
+.brochure-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+/* Card Style */
+.brochure-card {
+  background: #1e293b;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  width: 300px; /* lebar sama untuk semua card */
+}
+
+.brochure-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+/* Gambar Full */
+.brochure-card img {
+  width: 100%;
+  height: 230px;
+  object-fit: contain;
+  background-color: #0f172a;
+  display: block;
+}
+
+/* Isi Card */
+.card-body {
+  padding: 20px;
+  text-align: left;
+}
+
+/* Responsif Tablet */
+@media (max-width: 992px) {
+  .brochure-card {
+    width: 45%; /* otomatis menyesuaikan 2 per baris */
+  }
+}
+
+/* Responsif HP */
+@media (max-width: 768px) {
+  .brochure-card {
+    width: 90%; /* full-width di HP */
+  }
+
+  .card-body {
+    text-align: center;
+  }
+}
+
+
 
 
 

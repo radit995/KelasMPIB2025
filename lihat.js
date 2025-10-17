@@ -1,30 +1,68 @@
 // ==============================
-// LIHAT MAKALAH (versi final bersih + info detail)
+// LIHAT MAKALAH (support: PDF, DOCX, PPTX, XLSX) — versi FIX FINAL OFFLINE
 // ==============================
 
-// Ambil parameter ID dari URL
+// Ambil parameter dari URL
 const params = new URLSearchParams(window.location.search);
 const id = parseInt(params.get("id"));
-if (!id) {
-  document.getElementById("statusText").textContent = "❌ ID makalah tidak ditemukan.";
-  throw new Error("Parameter ID tidak valid");
+const matkulParam = params.get("matkul");
+
+if (!id || !matkulParam) {
+  document.getElementById("statusText").textContent = "❌ Parameter ID atau matkul tidak valid.";
+  throw new Error("Parameter tidak lengkap");
 }
 
 let db;
-const dbName = "DB_DasarAkuntansi"; // ⚠️ ganti sesuai nama database mata kuliah
+let dbName = "";
+
+// Tentukan nama database sesuai matkul
+switch (matkulParam) {
+  case "dasar-dasar-akuntansi":
+    dbName = "DB_DasarAkuntansi";
+    break;
+  case "filsafat-pendidikan":
+    dbName = "DB_FilsafatPendidikan";
+    break;
+  case "administrasi-manajemen-pendidikan":
+    dbName = "DB_AdministrasiManajemenPendidikan";
+    break;
+  case "pendidikan-pancasila":
+    dbName = "DB_PendidikanPancasila";
+    break;
+  case "studi-al-quran":
+    dbName = "DB_StudiAlQuran";
+    break;
+  case "bahasa-inggris":
+    dbName = "DB_BahasaInggris";
+    break;
+  case "studi-fikih":
+    dbName = "DB_StudiFikih";
+    break;
+  case "akhlak-tasawuf":
+    dbName = "DB_AkhlakTasawuf";
+    break;
+  case "budaya-organisasi":
+    dbName = "DB_BudayaOrganisasi";
+    break;
+  case "studi-hadist":
+    dbName = "DB_StudiHadist";
+    break;
+  case "dasar-dasar-manajemen":
+    dbName = "DB_DasarManajemen";
+    break;
+  case "ilmu-tauhid":
+    dbName = "DB_IlmuTauhid";
+    break;
+  default:
+    dbName = "DB_DasarAkuntansi";
+}
+
 
 // ==============================
 // Buka IndexedDB
 // ==============================
 document.addEventListener("DOMContentLoaded", () => {
   const request = indexedDB.open(dbName, 1);
-
-  request.onupgradeneeded = (e) => {
-    db = e.target.result;
-    if (!db.objectStoreNames.contains("makalahData")) {
-      db.createObjectStore("makalahData", { keyPath: "id", autoIncrement: true });
-    }
-  };
 
   request.onsuccess = (e) => {
     db = e.target.result;
@@ -56,7 +94,7 @@ function loadMakalah() {
       return;
     }
 
-    // 🟢 Hapus teks loading
+    // Bersihkan teks loading
     statusText.textContent = "";
 
     // ==============================
@@ -74,35 +112,81 @@ function loadMakalah() {
     `;
 
     // ==============================
-    // Preview file
+    // Tampilkan file (preview / notifikasi)
     // ==============================
     fileContainer.innerHTML = "";
     const ext = data.fileName.split(".").pop().toLowerCase();
 
+    // Konversi Base64 ke Blob untuk preview/download
+    const blob = dataURLtoBlob(data.fileData);
+    const blobUrl = URL.createObjectURL(blob);
+
     if (ext === "pdf") {
+      // PDF bisa langsung ditampilkan
       const embed = document.createElement("embed");
-      embed.src = data.fileData;
+      embed.src = blobUrl;
       embed.type = "application/pdf";
       embed.width = "100%";
       embed.height = "600px";
       embed.style.borderRadius = "10px";
       embed.style.marginTop = "20px";
       fileContainer.appendChild(embed);
+    } else if (["doc", "docx", "ppt", "pptx", "xls", "xlsx"].includes(ext)) {
+      // Format Office (tidak bisa preview lokal)
+      const info = document.createElement("div");
+      info.style.textAlign = "center";
+      info.style.marginTop = "40px";
+      info.innerHTML = `
+        <i class="fa-solid fa-file-word" style="font-size:60px;color:#2563eb;margin-bottom:10px;"></i>
+        <p style="font-size:16px;">
+          File <b>.${ext}</b> tidak bisa ditampilkan langsung di browser.<br>
+          Silakan klik tombol <b>⬇️ Download File</b> untuk membukanya di Microsoft Office atau WPS.
+        </p>
+      `;
+      fileContainer.appendChild(info);
+    } else {
+      // Format lain
+      const info = document.createElement("div");
+      info.style.textAlign = "center";
+      info.style.marginTop = "30px";
+      info.innerHTML = `
+        <i class="fa-solid fa-file" style="font-size:60px;color:#6b7280;margin-bottom:10px;"></i>
+        <p style="font-size:16px;">Format file <b>.${ext}</b> belum didukung untuk pratinjau.<br>
+        Silakan klik tombol <b>Download File</b>.</p>
+      `;
+      fileContainer.appendChild(info);
     }
 
     // ==============================
-    // Tombol download
+    // Tombol Download (fix semua format)
     // ==============================
     document.getElementById("downloadBtn").addEventListener("click", () => {
       const a = document.createElement("a");
-      a.href = data.fileData;
+      const blob = dataURLtoBlob(data.fileData);
+      const blobUrl = URL.createObjectURL(blob);
+      a.href = blobUrl;
       a.download = data.fileName;
       a.click();
     });
   };
 
   req.onerror = (e) => {
-    console.error("❌ Gagal mengambil data:", e.target.error);
-    document.getElementById("statusText").textContent = "❌ Gagal memuat file makalah.";
+    console.error("❌ Gagal memuat makalah:", e.target.error);
+    document.getElementById("statusText").textContent = "❌ Terjadi kesalahan saat memuat file.";
   };
+}
+
+// ==============================
+// Helper: Konversi Base64 → Blob
+// ==============================
+function dataURLtoBlob(dataURL) {
+  const arr = dataURL.split(",");
+  const mime = arr[0].match(/:(.*?);/)[1];
+  const bstr = atob(arr[1]);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new Blob([u8arr], { type: mime });
 }
